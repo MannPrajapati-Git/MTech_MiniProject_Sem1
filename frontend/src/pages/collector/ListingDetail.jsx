@@ -265,9 +265,14 @@ const ListingDetail = () => {
           <strong>{formatINR(selectedQuote?.offeredPricePerKg)}/kg</strong> from{' '}
           <strong>{selectedQuote?.recycler?.name}</strong>?
         </p>
-        <p style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)' }}>
-          ⚠️ Accepting this offer will reject all other quotations for this lot and generate a formal pickup transaction record.
-        </p>
+        <div style={{ display: 'flex', alignItems: 'flex-start', gap: '0.45rem', fontSize: '0.82rem', color: 'var(--gray-600)', backgroundColor: '#fffbeb', padding: '0.75rem', borderRadius: 'var(--radius-sm)', border: '1px solid #fde68a' }}>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#b45309" strokeWidth="2" style={{ flexShrink: 0, marginTop: '2px' }}>
+            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+            <line x1="12" y1="9" x2="12" y2="13" />
+            <line x1="12" y1="17" x2="12.01" y2="17" />
+          </svg>
+          <span>Accepting this offer will reject all other quotations for this lot and generate a formal pickup transaction record.</span>
+        </div>
       </Modal>
     </DashboardLayout>
   );

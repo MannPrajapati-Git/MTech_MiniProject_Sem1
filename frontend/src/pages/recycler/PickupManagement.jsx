@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import DashboardLayout from '../../components/DashboardLayout';
 import StatusBadge from '../../components/StatusBadge';
 import Modal from '../../components/Modal';
@@ -78,14 +78,28 @@ const PickupManagement = () => {
   const calculatedFinalAmount = weightInput * (selectedTx?.finalRatePerKg || 0);
 
   return (
-    <DashboardLayout title="Pickup & Handover Management">
+    <DashboardLayout title="Pickup Logistics & Handover Ledger">
       {loading ? (
         <LoadingSpinner message="Loading scheduled pickups..." />
       ) : pickups.length === 0 ? (
-        <div className="card" style={{ textAlign: 'center', padding: '3.5rem 1rem' }}>
-          <p style={{ color: 'var(--color-text-secondary)' }}>
-            No pickups currently assigned. When a collector accepts your quote, the handover order will appear here.
-          </p>
+        <div
+          style={{
+            backgroundColor: '#ffffff',
+            borderRadius: 'var(--radius-lg)',
+            border: '1px solid var(--gray-200)',
+            padding: '3.5rem 2rem',
+            textAlign: 'center',
+            color: 'var(--gray-500)'
+          }}
+        >
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="var(--gray-300)" strokeWidth="1.5" style={{ margin: '0 auto 1rem' }}>
+            <rect x="1" y="3" width="15" height="13" />
+            <polygon points="16 8 20 8 23 11 23 16 16 16 16 8" />
+            <circle cx="5.5" cy="18.5" r="2.5" />
+            <circle cx="18.5" cy="18.5" r="2.5" />
+          </svg>
+          <div style={{ fontWeight: 700, color: 'var(--gray-800)', marginBottom: '0.25rem' }}>No pickups currently assigned</div>
+          <div style={{ fontSize: '0.85rem' }}>When a scrap aggregator accepts your bid, the dispatch voucher will be listed here.</div>
         </div>
       ) : (
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
@@ -93,44 +107,75 @@ const PickupManagement = () => {
             const isCompleted = tx.transactionStatus === 'completed';
 
             return (
-              <div key={tx._id} className="card" style={{ padding: '1.75rem' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem', marginBottom: '1rem' }}>
+              <div
+                key={tx._id}
+                style={{
+                  backgroundColor: '#ffffff',
+                  borderRadius: 'var(--radius-lg)',
+                  border: '1px solid var(--gray-200)',
+                  padding: '1.75rem',
+                  boxShadow: 'var(--shadow-xs)'
+                }}
+              >
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: '1rem', marginBottom: '1.25rem' }}>
                   <div>
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.25rem' }}>
-                      <span style={{ fontSize: '1.15rem', fontWeight: 800 }}>Receipt #{tx.receiptId}</span>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '0.35rem' }}>
+                      <span
+                        style={{
+                          fontFamily: 'monospace',
+                          fontWeight: 700,
+                          fontSize: '0.85rem',
+                          color: 'var(--gray-800)',
+                          backgroundColor: 'var(--gray-100)',
+                          padding: '0.2rem 0.55rem',
+                          borderRadius: 'var(--radius-sm)'
+                        }}
+                      >
+                        Receipt #{tx.receiptId}
+                      </span>
                       <StatusBadge status={tx.transactionStatus} />
                     </div>
-                    <div style={{ fontSize: '0.9rem', color: 'var(--color-text-secondary)' }}>
-                      Collector: <strong>{tx.collector?.name}</strong> &nbsp;|&nbsp;
-                      Phone: <a href={`tel:${tx.collector?.phone}`}>{tx.collector?.phone}</a>
+                    <div style={{ fontSize: '0.88rem', color: 'var(--gray-600)' }}>
+                      Collector: <strong style={{ color: 'var(--gray-900)' }}>{tx.collector?.name}</strong> &nbsp;|&nbsp;
+                      Phone: <a href={`tel:${tx.collector?.phone}`} style={{ color: 'var(--primary-700)', textDecoration: 'none' }}>{tx.collector?.phone}</a>
                     </div>
                   </div>
 
                   <div style={{ textAlign: 'right' }}>
-                    <span style={{ fontSize: '0.8rem', color: 'var(--color-text-muted)', display: 'block' }}>
-                      Agreed Rate Per KG
+                    <span style={{ fontSize: '0.78rem', color: 'var(--gray-500)', display: 'block' }}>
+                      Contracted Spot Rate
                     </span>
-                    <span style={{ fontSize: '1.3rem', fontWeight: 800, color: 'var(--color-brand-700)' }}>
-                      {formatINR(tx.finalRatePerKg)} / kg
+                    <span style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--primary-700)' }}>
+                      {formatINR(tx.finalRatePerKg)} <span style={{ fontSize: '0.8rem', color: 'var(--gray-500)' }}>/ kg</span>
                     </span>
                   </div>
                 </div>
 
-                <div className="grid-3" style={{ backgroundColor: 'var(--color-surface-subtle)', padding: '1rem', borderRadius: 'var(--radius-md)', fontSize: '0.875rem', marginBottom: '1.25rem' }}>
+                <div
+                  className="grid-3"
+                  style={{
+                    backgroundColor: 'var(--gray-50)',
+                    padding: '1.1rem',
+                    borderRadius: 'var(--radius-md)',
+                    fontSize: '0.85rem',
+                    marginBottom: '1.25rem',
+                    border: '1px solid var(--gray-200)'
+                  }}
+                >
                   <div>
-                    <span style={{ color: 'var(--color-text-muted)', display: 'block' }}>Material Lot:</span>
-                    <strong>{tx.listing?.title}</strong> ({tx.listing?.category})
+                    <span style={{ color: 'var(--gray-500)', display: 'block', fontSize: '0.78rem' }}>Material Stream:</span>
+                    <strong style={{ color: 'var(--gray-900)' }}>{tx.listing?.title}</strong> ({tx.listing?.category})
                   </div>
                   <div>
-                    <span style={{ color: 'var(--color-text-muted)', display: 'block' }}>Collector Address:</span>
-                    <strong>
+                    <span style={{ color: 'var(--gray-500)', display: 'block', fontSize: '0.78rem' }}>Pickup Facility Location:</span>
+                    <strong style={{ color: 'var(--gray-900)' }}>
                       {tx.collector?.address?.street}, {tx.collector?.address?.city}
                     </strong>
                   </div>
                   <div>
-                    <span style={{ color: 'var(--color-text-muted)', display: 'block' }}>Final Weight & Settlement:</span>
-                    <strong>
-                      {isCompleted ? `${formatWeight(tx.verifiedWeight)} (${formatINR(tx.finalAmount)})` : 'Pending Verification'}
+                    <span style={{ color: 'var(--gray-500)', display: 'block', fontSize: '0.78rem' }}>Scale Verified & Settled:</span>
+                    <strong style={{ color: isCompleted ? 'var(--primary-700)' : 'var(--gray-700)' }}>
+                      {isCompleted ? `${formatWeight(tx.verifiedWeight)} (${formatINR(tx.finalAmount)})` : 'Pending Scale Intake'}
                     </strong>
                   </div>
                 </div>
@@ -141,12 +186,28 @@ const PickupManagement = () => {
                       type="button"
                       onClick={() => handleOpenVerifyModal(tx)}
                       className="btn btn-primary"
-                      style={{ fontSize: '0.875rem' }}
+                      style={{ fontSize: '0.85rem', display: 'inline-flex', alignItems: 'center', gap: '0.45rem' }}
                     >
-                      ⚖️ Verify Physical Weight & Close Deal
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                      </svg>
+                      Verify Scale Weight & Close Deal
                     </button>
                   ) : (
-                    <span style={{ color: 'var(--color-brand-700)', fontWeight: 700, fontSize: '0.9rem' }}>
+                    <span
+                      style={{
+                        color: 'var(--primary-800)',
+                        backgroundColor: 'var(--primary-50)',
+                        border: '1px solid var(--primary-200)',
+                        padding: '0.35rem 0.85rem',
+                        borderRadius: 'var(--radius-full)',
+                        fontWeight: 700,
+                        fontSize: '0.82rem',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        gap: '0.35rem'
+                      }}
+                    >
                       ✓ Handover Completed on {formatDate(tx.updatedAt)}
                     </span>
                   )}
@@ -167,12 +228,12 @@ const PickupManagement = () => {
         isLoading={verifying}
       >
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-          <p style={{ fontSize: '0.9rem', color: 'var(--color-text-secondary)', margin: 0 }}>
-            Enter the exact weight recorded on the physical weighing scale during pickup.
+          <p style={{ fontSize: '0.85rem', color: 'var(--gray-600)', margin: 0, lineHeight: 1.5 }}>
+            Enter the certified physical weight recorded on the digital scale during handover at site.
           </p>
 
           <div className="form-group">
-            <label className="form-label">Physically Verified Weight (in KG) *</label>
+            <label className="form-label">Physically Verified Net Weight (in KG) *</label>
             <input
               type="number"
               step="0.01"
@@ -185,47 +246,49 @@ const PickupManagement = () => {
           </div>
 
           <div className="form-group">
-            <label className="form-label">Payment Status *</label>
+            <label className="form-label">Payment Settlement Status *</label>
             <select
               className="form-select"
               value={verifyForm.paymentStatus}
               onChange={(e) => setVerifyForm({ ...verifyForm, paymentStatus: e.target.value })}
             >
-              <option value="completed">Payment Settled (Cash/UPI Transferred)</option>
-              <option value="pending">Payment Pending (Net 7 Days Settlement)</option>
+              <option value="completed">Payment Settled (IMPS / UPI / Instant Transfer)</option>
+              <option value="pending">Net 7 Days Corporate Invoice Settlement</option>
             </select>
           </div>
 
           <div className="form-group">
-            <label className="form-label">Handover Quality Remarks</label>
+            <label className="form-label">Handover Quality Remarks (Optional)</label>
             <textarea
               rows="2"
               className="form-textarea"
-              placeholder="e.g. Components match description, negligible contamination."
+              placeholder="e.g. Segregation verified. No wet batteries or hazard leaks detected."
               value={verifyForm.notes}
               onChange={(e) => setVerifyForm({ ...verifyForm, notes: e.target.value })}
             />
           </div>
 
           {/* Interactive Settlement Summary Box */}
-          <div style={{
-            backgroundColor: 'var(--color-brand-50)',
-            padding: '1rem',
-            borderRadius: 'var(--radius-md)',
-            border: '1px solid var(--color-brand-200)'
-          }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem', marginBottom: '0.35rem' }}>
-              <span>Agreed Unit Price:</span>
-              <strong>{formatINR(selectedTx?.finalRatePerKg)} / kg</strong>
+          <div
+            style={{
+              backgroundColor: 'var(--primary-50)',
+              padding: '1rem 1.25rem',
+              borderRadius: 'var(--radius-md)',
+              border: '1px solid var(--primary-200)'
+            }}
+          >
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.82rem', marginBottom: '0.35rem', color: 'var(--gray-600)' }}>
+              <span>Agreed Unit Spot Rate:</span>
+              <strong style={{ color: 'var(--gray-900)' }}>{formatINR(selectedTx?.finalRatePerKg)} / kg</strong>
             </div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem', marginBottom: '0.35rem' }}>
-              <span>Verified Scale Weight:</span>
-              <strong>{formatWeight(weightInput)}</strong>
+            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.82rem', marginBottom: '0.35rem', color: 'var(--gray-600)' }}>
+              <span>Scale Net Weight:</span>
+              <strong style={{ color: 'var(--gray-900)' }}>{formatWeight(weightInput)}</strong>
             </div>
-            <hr style={{ border: 'none', borderTop: '1px solid var(--color-brand-200)', margin: '0.5rem 0' }} />
+            <hr style={{ border: 'none', borderTop: '1px solid var(--primary-200)', margin: '0.5rem 0' }} />
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <span style={{ fontWeight: 700, color: 'var(--color-brand-900)' }}>Final Transaction Payout:</span>
-              <span style={{ fontSize: '1.35rem', fontWeight: 800, color: 'var(--color-brand-700)' }}>
+              <span style={{ fontWeight: 700, color: 'var(--primary-900)', fontSize: '0.88rem' }}>Final Total Payout:</span>
+              <span style={{ fontSize: '1.3rem', fontWeight: 800, color: 'var(--primary-800)' }}>
                 {formatINR(calculatedFinalAmount)}
               </span>
             </div>

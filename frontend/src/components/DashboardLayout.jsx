@@ -1,20 +1,29 @@
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import Navbar from './Navbar';
 import Sidebar from './Sidebar';
-import ScrollToTop from './ScrollToTop';
 
 const DashboardLayout = ({ title, children, actions }) => {
+  const location = useLocation();
+
+  // Scroll to top on route change
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: 'var(--color-surface-page)' }}>
+    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', backgroundColor: 'var(--surface-muted)' }}>
       <Navbar />
-      <div style={{ display: 'flex', flex: 1, position: 'relative' }}>
+      <div style={{ display: 'flex', flex: 1 }}>
         <Sidebar />
         <main
+          className="dashboard-main"
           style={{
             flex: 1,
-            padding: '2.25rem 2.75rem',
-            backgroundColor: 'var(--color-surface-page)',
+            padding: '1.5rem 2rem',
             maxWidth: '100%',
-            overflowX: 'hidden'
+            overflowX: 'hidden',
+            minHeight: 'calc(100vh - 64px)'
           }}
         >
           {title && (
@@ -23,37 +32,34 @@ const DashboardLayout = ({ title, children, actions }) => {
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center',
-                marginBottom: '2rem',
+                marginBottom: '1.5rem',
                 flexWrap: 'wrap',
-                gap: '1.25rem',
-                paddingBottom: '1.25rem',
-                borderBottom: '1px solid var(--color-border-default)'
+                gap: '1rem'
               }}
             >
               <div>
-                <h1
-                  style={{
-                    fontSize: '1.85rem',
-                    fontWeight: 800,
-                    letterSpacing: '-0.02em',
-                    color: 'var(--color-text-primary)'
-                  }}
-                >
+                <h1 style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--text-primary)', letterSpacing: '-0.02em' }}>
                   {title}
                 </h1>
-                <p style={{ fontSize: '0.85rem', color: 'var(--color-text-muted)', marginTop: '0.2rem' }}>
-                  Kabadiwala Connect Platform Management
+                <p style={{ fontSize: '0.8125rem', color: 'var(--text-muted)', marginTop: '0.125rem' }}>
+                  Kabadiwala Connect Platform
                 </p>
               </div>
-
-              {actions && <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>{actions}</div>}
+              {actions && <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>{actions}</div>}
             </div>
           )}
-
           {children}
         </main>
       </div>
-      <ScrollToTop />
+
+      <style>{`
+        @media (max-width: 768px) {
+          .dashboard-main {
+            padding: 1rem !important;
+            padding-bottom: 4.5rem !important;
+          }
+        }
+      `}</style>
     </div>
   );
 };

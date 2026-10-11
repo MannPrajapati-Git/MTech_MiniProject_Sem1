@@ -33,10 +33,13 @@ import AllListings from './pages/admin/AllListings';
 import AllTransactions from './pages/admin/AllTransactions';
 import UserManagement from './pages/admin/UserManagement';
 
+import ScrollToTop from './components/ScrollToTop';
+
 function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
+        <ScrollToTop />
         <Routes>
           {/* ================= PUBLIC ROUTES ================= */}
           <Route path="/" element={<Home />} />

@@ -206,8 +206,14 @@ const RecyclerDirectory = () => {
                       </span>
                     </div>
 
-                    <div style={{ fontSize: '0.88rem', color: 'var(--color-text-secondary)', marginBottom: '0.85rem' }}>
-                      📍 <strong>{r.city}, {r.state}</strong> &nbsp;|&nbsp; Operating License: <code>{r.license}</code> &nbsp;|&nbsp; Capacity: {r.capacity}
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.4rem', fontSize: '0.88rem', color: 'var(--gray-600)', marginBottom: '0.85rem' }}>
+                      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                        <circle cx="12" cy="10" r="3" />
+                      </svg>
+                      <span>
+                        <strong style={{ color: 'var(--gray-900)' }}>{r.city}, {r.state}</strong> &nbsp;|&nbsp; Operating License: <code style={{ backgroundColor: 'var(--gray-100)', padding: '0.15rem 0.4rem', borderRadius: 'var(--radius-sm)' }}>{r.license}</code> &nbsp;|&nbsp; Capacity: {r.capacity}
+                      </span>
                     </div>
 
                     <div style={{ display: 'flex', gap: '0.45rem', flexWrap: 'wrap', alignItems: 'center' }}>

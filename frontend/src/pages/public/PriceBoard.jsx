@@ -98,7 +98,25 @@ const PriceBoard = () => {
               alignItems: 'flex-start'
             }}
           >
-            <span style={{ fontSize: '1.4rem' }}>⚠️</span>
+            <div
+              style={{
+                width: '32px',
+                height: '32px',
+                borderRadius: 'var(--radius-sm)',
+                backgroundColor: '#fef3c7',
+                color: '#b45309',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexShrink: 0
+              }}
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+                <line x1="12" y1="9" x2="12" y2="13" />
+                <line x1="12" y1="17" x2="12.01" y2="17" />
+              </svg>
+            </div>
             <div>
               <strong style={{ color: '#78350f' }}>CPCB Fair-Trade Mandate:</strong> Rates displayed below reflect dry, segregated scrap lots. Final recycler bids on the platform are submitted directly by industrial buyers and may exceed benchmark prices depending on gold/copper purity and verified scale weigh-in at pickup.
             </div>
@@ -267,9 +285,30 @@ const PriceBoard = () => {
               border: '1.5px solid var(--color-border-brand)'
             }}
           >
-            <h3 style={{ fontSize: '1.3rem', fontWeight: 800, marginBottom: '0.5rem', color: 'var(--color-text-primary)' }}>
-              💡 How to Maximize Your Lot Valuation
-            </h3>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '0.5rem' }}>
+              <div
+                style={{
+                  width: '30px',
+                  height: '30px',
+                  borderRadius: 'var(--radius-sm)',
+                  backgroundColor: 'var(--primary-100)',
+                  color: 'var(--primary-800)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center'
+                }}
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M9 18h6" />
+                  <path d="M10 22h4" />
+                  <path d="M12 2v1" />
+                  <path d="M12 7a5 5 0 0 0-5 5c0 2 1.5 3 2 4h6c.5-1 2-2 2-4a5 5 0 0 0-5-5z" />
+                </svg>
+              </div>
+              <h3 style={{ fontSize: '1.3rem', fontWeight: 800, margin: 0, color: 'var(--gray-900)' }}>
+                How to Maximize Your Scrap Lot Valuation
+              </h3>
+            </div>
             <p style={{ fontSize: '0.92rem', color: 'var(--color-text-secondary)', marginBottom: '1.5rem', lineHeight: '1.6' }}>
               Authorized recyclers pay higher premiums when scrap lots arrive clean, dry, and properly segregated by metal type.
             </p>

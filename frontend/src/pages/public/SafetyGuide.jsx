@@ -66,9 +66,26 @@ const SafetyGuide = () => {
                 borderRadius: 'var(--radius-xl)'
               }}
             >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1.25rem' }}>
-                <span style={{ fontSize: '1.6rem' }}>🚫</span>
-                <h3 style={{ fontSize: '1.3rem', fontWeight: 800, color: '#991b1b', margin: 0 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', marginBottom: '1.25rem' }}>
+                <div
+                  style={{
+                    width: '32px',
+                    height: '32px',
+                    borderRadius: 'var(--radius-sm)',
+                    backgroundColor: '#fee2e2',
+                    color: '#dc2626',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexShrink: 0
+                  }}
+                >
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <circle cx="12" cy="12" r="10" />
+                    <line x1="4.93" y1="4.93" x2="19.07" y2="19.07" />
+                  </svg>
+                </div>
+                <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: '#991b1b', margin: 0 }}>
                   Hazardous Practices (Never Do)
                 </h3>
               </div>
@@ -103,9 +120,26 @@ const SafetyGuide = () => {
                 boxShadow: 'var(--shadow-brand-glow)'
               }}
             >
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', marginBottom: '1.25rem' }}>
-                <span style={{ fontSize: '1.6rem' }}>✅</span>
-                <h3 style={{ fontSize: '1.3rem', fontWeight: 800, color: 'var(--color-brand-800)', margin: 0 }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', marginBottom: '1.25rem' }}>
+                <div
+                  style={{
+                    width: '32px',
+                    height: '32px',
+                    borderRadius: 'var(--radius-sm)',
+                    backgroundColor: 'var(--primary-100)',
+                    color: 'var(--primary-800)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    flexShrink: 0
+                  }}
+                >
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    <polyline points="9 12 11 14 15 10" />
+                  </svg>
+                </div>
+                <h3 style={{ fontSize: '1.25rem', fontWeight: 800, color: 'var(--primary-900)', margin: 0 }}>
                   Mandatory Safe Practices
                 </h3>
               </div>
@@ -189,9 +223,28 @@ const SafetyGuide = () => {
               border: '1.5px solid var(--color-brand-300)'
             }}
           >
-            <h3 style={{ fontSize: '1.35rem', fontWeight: 800, marginBottom: '0.5rem', color: 'var(--color-brand-900)' }}>
-              🧤 Collector Personal Protective Equipment (PPE) Checklist
-            </h3>
+            <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', marginBottom: '0.5rem' }}>
+              <div
+                style={{
+                  width: '32px',
+                  height: '32px',
+                  borderRadius: 'var(--radius-sm)',
+                  backgroundColor: 'var(--primary-100)',
+                  color: 'var(--primary-800)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexShrink: 0
+                }}
+              >
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                </svg>
+              </div>
+              <h3 style={{ fontSize: '1.35rem', fontWeight: 800, margin: 0, color: 'var(--primary-900)' }}>
+                Collector Personal Protective Equipment (PPE) Checklist
+              </h3>
+            </div>
             <p style={{ fontSize: '0.92rem', color: 'var(--color-text-secondary)', marginBottom: '1.5rem' }}>
               Essential low-cost safety gear recommended by Central Pollution Control Board (CPCB) guidelines:
             </p>

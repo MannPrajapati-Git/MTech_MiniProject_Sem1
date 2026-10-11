@@ -1,39 +1,50 @@
-const StatCard = ({ title, value, subtext, icon, trend }) => {
+const StatCard = ({ title, value, subtext, icon, trend, trendPositive = true }) => {
   return (
     <div
-      className="card"
       style={{
+        backgroundColor: '#ffffff',
+        borderRadius: 'var(--radius-lg)',
+        border: '1px solid var(--gray-200)',
+        padding: '1.5rem',
+        position: 'relative',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',
-        padding: '1.6rem',
-        borderRadius: 'var(--radius-lg)',
-        position: 'relative',
-        overflow: 'hidden',
-        background: 'linear-gradient(180deg, #ffffff 0%, #fafdfb 100%)',
-        border: '1px solid var(--color-border-default)'
+        transition: 'all 0.25s cubic-bezier(0.16, 1, 0.3, 1)',
+        boxShadow: 'var(--shadow-xs)',
+        overflow: 'hidden'
+      }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.transform = 'translateY(-3px)';
+        e.currentTarget.style.boxShadow = 'var(--shadow-md)';
+        e.currentTarget.style.borderColor = 'var(--gray-300)';
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.transform = 'translateY(0)';
+        e.currentTarget.style.boxShadow = 'var(--shadow-xs)';
+        e.currentTarget.style.borderColor = 'var(--gray-200)';
       }}
     >
-      {/* Decorative top accent glow */}
+      {/* Top subtle border accent */}
       <div
         style={{
           position: 'absolute',
           top: 0,
           left: 0,
           right: 0,
-          height: '3px',
-          background: 'linear-gradient(90deg, #059669 0%, #34d399 100%)'
+          height: '2px',
+          background: 'linear-gradient(90deg, var(--primary-600) 0%, var(--primary-400) 100%)'
         }}
       />
 
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.8rem' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '1rem' }}>
         <span
           style={{
-            fontSize: '0.85rem',
+            fontSize: '0.8rem',
             fontWeight: 700,
-            color: 'var(--color-text-secondary)',
             textTransform: 'uppercase',
-            letterSpacing: '0.04em'
+            letterSpacing: '0.06em',
+            color: 'var(--gray-500)'
           }}
         >
           {title}
@@ -41,16 +52,16 @@ const StatCard = ({ title, value, subtext, icon, trend }) => {
         {icon && (
           <div
             style={{
-              width: '40px',
-              height: '40px',
+              width: '38px',
+              height: '38px',
               borderRadius: 'var(--radius-md)',
-              backgroundColor: 'rgba(16, 185, 129, 0.1)',
-              color: 'var(--color-brand-600)',
+              backgroundColor: 'var(--primary-50)',
+              color: 'var(--primary-700)',
+              border: '1px solid var(--primary-100)',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              fontSize: '1.25rem',
-              boxShadow: '0 2px 6px rgba(16, 185, 129, 0.15)'
+              flexShrink: 0
             }}
           >
             {icon}
@@ -61,12 +72,12 @@ const StatCard = ({ title, value, subtext, icon, trend }) => {
       <div>
         <div
           style={{
-            fontSize: '2.1rem',
+            fontSize: '1.9rem',
             fontWeight: 800,
-            color: 'var(--color-text-primary)',
+            color: 'var(--gray-900)',
             letterSpacing: '-0.03em',
             lineHeight: 1.15,
-            marginBottom: '0.45rem'
+            marginBottom: '0.5rem'
           }}
         >
           {value}
@@ -76,22 +87,23 @@ const StatCard = ({ title, value, subtext, icon, trend }) => {
           {trend && (
             <span
               style={{
-                fontSize: '0.75rem',
+                fontSize: '0.72rem',
                 fontWeight: 700,
                 padding: '0.15rem 0.5rem',
                 borderRadius: 'var(--radius-full)',
-                backgroundColor: 'var(--color-brand-100)',
-                color: 'var(--color-brand-800)',
+                backgroundColor: trendPositive ? 'var(--primary-50)' : '#fef2f2',
+                color: trendPositive ? 'var(--primary-800)' : '#991b1b',
+                border: `1px solid ${trendPositive ? 'var(--primary-200)' : '#fecaca'}`,
                 display: 'inline-flex',
                 alignItems: 'center',
                 gap: '0.2rem'
               }}
             >
-              {trend}
+              {trendPositive ? '↑' : '↓'} {trend}
             </span>
           )}
           {subtext && (
-            <span style={{ fontSize: '0.82rem', color: 'var(--color-text-muted)', fontWeight: 500 }}>
+            <span style={{ fontSize: '0.8rem', color: 'var(--gray-500)', fontWeight: 500 }}>
               {subtext}
             </span>
           )}
